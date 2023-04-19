@@ -133,6 +133,7 @@ class HBNBCommand(cmd.Cmd):
                 val = param.partition('=')[2]
                 if '\"' in val:
                     val = val.strip('\"')
+                    val = val.replace('_', ' ')
                 elif eval(val):
                     val = eval(val)
                 param_dict.update({key: val})
