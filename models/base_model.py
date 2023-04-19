@@ -21,8 +21,6 @@ class BaseModel:
                     self.__dict__[key] = datetime.strptime(value, date_format)
                 else:
                     self.__dict__[key] = value
-        else:
-            storage.new(self)
 
     def __str__(self):
         """Returns a string representation of the instance"""
