@@ -2,6 +2,7 @@
 """ Console Module """
 import cmd
 import sys
+from datetime import datetime
 from models.base_model import BaseModel
 from models.__init__ import storage
 from models.user import User
@@ -118,18 +119,36 @@ class HBNBCommand(cmd.Cmd):
         if not args:
             print("** class name missing **")
             return
-        elif args not in HBNBCommand.classes:
+        classname = args.partition(' ')[0]
+        params = args.partition(' ')[2]
+        if classname not in HBNBCommand.classes:
             print("** class doesn't exist **")
             return
-        new_instance = HBNBCommand.classes[args]()
-        storage.save()
+        params = params.strip(' ').split(' ')
+        param_dict = {}
+        for param in params:
+            key = val = ''
+            if '=' in param:
+                key = param.partition('=')[0]
+                val = param.partition('=')[2]
+                if '\"' in val:
+                    val = val.strip('\"')
+                elif eval(val):
+                    val = eval(val)
+                param_dict.update({key: val})
+        if param_dict == {}:
+            new_instance = HBNBCommand.classes[classname]()
+        else:
+            new_instance = HBNBCommand.classes[classname](**param_dict)
+            storage.new(new_instance)
         print(new_instance.id)
         storage.save()
 
     def help_create(self):
         """ Help information for the create method """
         print("Creates a class of any type")
-        print("[Usage]: create <className>\n")
+        print("[Usage]: create <Class name> <param 1>...")
+        print("<key name>=<value>\n")
 
     def do_show(self, args):
         """ Method to show an individual object """
