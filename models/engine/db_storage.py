@@ -30,10 +30,10 @@ class DBStorage:
                                       pool_pre_ping=True)
         if getenv("HBNB_ENV") == "test":
             Base.metadata.drop_all(self.__engine)
-    
+
     def all(self, cls=None):
         """query the current database session
-        
+
         Return:
             Dict of queried classes in the format <class name>.<obj id> = obj.
         """
@@ -54,7 +54,6 @@ class DBStorage:
             val = obj
             obj_dict[key] = val
         return obj_dict
-        #return {"{}.{}".format(type(o).__name__, o.id): o for o in objs}
 
     def new(self, obj):
         """adds a new object instance to the database"""
@@ -70,8 +69,11 @@ class DBStorage:
             self.__session.delete(obj)
 
     def reload(self):
-        """create all tables in the database and creates a current database session"""
+        """create all tables in the database and
+        creates a current database session
+        """
         Base.metadata.create_all(self.__engine)
-        session_factory = sessionmaker(bind=self.__engine, expire_on_commit=False)
+        session_factory = sessionmaker(bind=self.__engine,
+                                       expire_on_commit=False)
         Session = scoped_session(session_factory)
         self.__session = Session()
