@@ -10,7 +10,7 @@ def do_pack():
     local("sudo mkdir -p versions")
     date = datetime.now().strftime("%Y%m%d%H%M%S")
     filename = "versions/web_static_{}.tgz".format(date)
-    req = local("sudo tar -cvzf {} web_static".format(filename))
+    req = local("sudo tar -cvf {} web_static".format(filename))
     if req.succeeded:
         return filename
     else:
