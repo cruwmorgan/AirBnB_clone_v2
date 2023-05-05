@@ -52,7 +52,7 @@ def do_deploy(archive_path):
         # Create a new the symbolic link
         run("ln -s {}/ /data/web_static/current".format(no_ext))
         return True
-    except:
+    except archive_path.DoesNotExist:
         return False
 
 
