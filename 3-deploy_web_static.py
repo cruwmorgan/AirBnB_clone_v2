@@ -10,6 +10,7 @@ from os.path import exists
 # my web servers
 env.hosts = ['54.165.42.62', '54.160.108.20']
 
+
 def do_pack():
     """generates a .tgz archive from the contents of the web_static folder
     """
@@ -21,6 +22,7 @@ def do_pack():
         return filename
     else:
         return None
+
 
 def do_deploy(archive_path):
     """script that distributes an archive to my web servers
@@ -52,6 +54,7 @@ def do_deploy(archive_path):
         return True
     except:
         return False
+
 
 def deploy():
     """ creates and distributes an archive to your web servers
