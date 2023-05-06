@@ -7,6 +7,7 @@ from fabric.api import *
 from datetime import datetime
 import os
 
+# generates archive
 def do_pack():
     local("sudo mkdir -p versions")
     date = datetime.now().strftime("%Y%m%d%H%M%S")
