@@ -42,17 +42,17 @@ def do_deploy(archive_path):
         run("sudo mkdir -p {}/".format(no_ext))
         # Uncompress the archive to the folder /data/web_static/releases/
         # ...<archive filename without extension> on the web server
-        run("tar -xzf {} -C {}/".format(tmp, no_ext))
+        run("sudo tar -xzf {} -C {}/".format(tmp, no_ext))
         # Delete the archive from the web server
-        run("rm {}".format(tmp))
-        run("mv {}/web_static/* {}/".format(no_ext, no_ext))
-        run("rm -rf {}/web_static".format(no_ext))
+        run("sudo rm {}".format(tmp))
+        run("sudo mv {}/web_static/* {}/".format(no_ext, no_ext))
+        run("sudo rm -rf {}/web_static".format(no_ext))
         # Delete the symbolic link /data/web_static/current from the server
-        run("rm -rf /data/web_static/current")
+        run("sudo rm -rf /data/web_static/current")
         # Create a new the symbolic link
-        run("ln -s {}/ /data/web_static/current".format(no_ext))
+        run("sudo ln -s {}/ /data/web_static/current".format(no_ext))
         return True
-    except archive_path.DoesNotExist:
+    except:
         return False
 
 
