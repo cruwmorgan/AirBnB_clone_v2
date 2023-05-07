@@ -69,11 +69,15 @@ def deploy():
 def do_clean(number=0):
     if number == 0 or number == 1:
         with lcd('./versions/'):
-            local("ls -t | tail -n +1 | xargs -d '\n' rm")
+            local("ls -t | rev | cut -f 1 | rev | \
+                    head -n +1 | xargs -d '\n' rm")
         with cd('/data/web_static/releases/'):
-            run("sudo ls -t | tail -n +1 | xargs -d '\n' rm")
+            run("sudo ls -t | rev | cut -f 1 | rev | \
+                    head -n +1 | xargs -d '\n' rm -rf")
     else:
         with lcd('./versions/'):
-            local("ls -t | tail -n +{} | xargs -d '\n' rm".format(number))
+            local("ls -t | rev | cut -f 1 | rev | \
+                    head -n +{} | xargs -d '\n' rm".format(number))
         with cd('/data/web_static/releases/'):
-            run("sudo ls -t | tail -n +{} | xargs -d '\n' rm".format(number))
+            run("sudo ls -t | rev | cut -f 1 | rev | \
+                    head -n +{} | xargs -d '\n' rm -rf".format(number))
