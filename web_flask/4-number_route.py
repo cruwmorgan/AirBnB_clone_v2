@@ -18,7 +18,6 @@ def hbnb():
     return 'HBNB'
 
 
-@app.route('/c/', strict_slashes=False)
 @app.route('/c/<string:text>', strict_slashes=False)
 def text(text=None):
     """display C followed by the value of the text variable"""
@@ -32,7 +31,6 @@ def python_text(text='is cool'):
     return "Python {}".format(text.replace('_', ' '))
 
 
-@app.route('/number/', strict_slashes=False)
 @app.route('/number/<int:n>', strict_slashes=False)
 def int_text(n=None):
     """display n is a number only if n is an integer"""
