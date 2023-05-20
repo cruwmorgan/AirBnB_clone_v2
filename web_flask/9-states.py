@@ -20,10 +20,10 @@ def state_template():
 
 
 @app.route('/states/<string:id>', strict_slashes=False)
-def state_list_by_id(id=None):
+def list_by_id(id=None):
     """display a HTML page"""
-    sid = 'State.{}'.format(id)
-    return render_template('9-states.html', states=storage.all(State).get(sid)
+    return render_template('9-states.html',
+            states=storage.all(State).get('State.{}'.format(id)))
 
 
 if __name__ == '__main__':
