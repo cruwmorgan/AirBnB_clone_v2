@@ -17,8 +17,9 @@ def close_strg(self):
 @app.route('/hbnb_filters', strict_slashes=False)
 def hbnb_template():
     """DIsplays an html page"""
-    return render_template('10-hbnb_filters.html',
-         states=storage.all(State), amenities=storage.all(Amenity))
+    st_ls = storage.all(State)
+    am = storage.all(Amenity)
+    return render_template('10-hbnb_filters.html', states=st_ls, amenities=am)
 
 
 if __name__ == '__main__':
