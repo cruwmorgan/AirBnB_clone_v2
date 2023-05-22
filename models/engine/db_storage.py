@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/python3
 """A module that defines the db-storage class"""
 from os import getenv
 from models.base_model import Base
